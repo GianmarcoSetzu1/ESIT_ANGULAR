@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {catchError, first} from "rxjs/operators";
+import {User} from "../../models/User";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 
 
@@ -13,7 +16,7 @@ import {Router} from "@angular/router";
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
     this.signupForm = this.createFormGroup();
@@ -31,9 +34,16 @@ export class SignupComponent implements OnInit {
   }
 
   signup(): void {
-    this.authService.signup(this.signupForm.value).subscribe((msg) => {
-      console.log(msg);
+    this.authService.signup(this.signupForm.value)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<User>("signup"))
+      )
+      .subscribe(
+        resp => console.log(resp),
+        err => console.log(err)
+      );
       this.router.navigate(["login"]);
-    });
+      console.log(this.signupForm.value);
   }
 }
