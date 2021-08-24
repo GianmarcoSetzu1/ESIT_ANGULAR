@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 import { User } from "../models/User";
 import {BehaviorSubject, Observable} from "rxjs";
-import {catchError, first} from "rxjs/operators";
+import {catchError, first, tap} from "rxjs/operators";
 import {ErrorHandlerService} from "./error-handler.service";
 
 
@@ -15,7 +15,7 @@ export class AuthService {
   private url = "http://localhost:8000/auth";
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
-  userUsername: Pick<User, "id">;
+  userId: Pick<User, "id">;
 
 
   httpOptions: { headers: HttpHeaders } = {
@@ -30,6 +30,12 @@ export class AuthService {
 
   signup(user: Omit<User, "id">): Observable<User> {
     return this.http.post<User>(`${this.url}/signup`, user, this.httpOptions);
+  }
+
+
+  login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<any> {
+    return this.http
+      .post(`${this.url}/login`, {email, password}, this.httpOptions);
   }
 
 }
