@@ -43,7 +43,8 @@ export class SignupComponent implements OnInit {
         resp => console.log(resp),
         err => console.log(err)
       );
-      this.router.navigate(["login"]);
+      this.router.navigate([""]);
+      //this.router.navigate(["login"]);
       console.log(this.signupForm.value);
   }
 }

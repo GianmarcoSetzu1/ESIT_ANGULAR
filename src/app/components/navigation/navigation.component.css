@@ -13,6 +13,8 @@ mat-toolbar a:active {
 
 mat-toolbar a span {
       margin-left: 24px;
+      margin-right: 24px;
+      color: aliceblue;
 }
 
 

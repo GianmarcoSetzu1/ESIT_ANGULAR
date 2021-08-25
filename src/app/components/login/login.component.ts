@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         first(),
         tap((tokenObject: { token: string; userId: Pick<User, "id"> }) => {
           this.userId = tokenObject.userId;
+          this.authService.userId = this.userId;    //Added manually to pass this parameter at the home component
           localStorage.setItem("token", tokenObject.token);
           this.isUserLoggedIn$.next(true);
           this.router.navigate(["home"]);
@@ -52,8 +53,8 @@ export class LoginComponent implements OnInit {
         )
       )
       .subscribe(
-        resp => console.log(resp),
-        err => console.log(err)
+         resp => console.log(resp),
+         err => console.log(err)
       );
 
   }

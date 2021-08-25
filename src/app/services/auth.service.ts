@@ -34,8 +34,10 @@ export class AuthService {
 
 
   login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<any> {
+    //console.log(this.userId);
     return this.http
-      .post(`${this.url}/login`, {email, password}, this.httpOptions);
+      .post(`${this.url}`, {email, password}, this.httpOptions);
+      //.post(`${this.url}/login`, {email, password}, this.httpOptions);
   }
 
 }
