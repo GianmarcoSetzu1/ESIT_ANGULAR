@@ -16,6 +16,7 @@ export class AuthService {
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
+  userName : Pick<User, "name">;
 
 
   httpOptions: { headers: HttpHeaders } = {

@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
+  userName: Pick<User, "name">;
 
   constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
@@ -39,16 +40,24 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
       .pipe(
         first(),
-        tap((tokenObject: { token: string; userId: Pick<User, "id"> }) => {
+        tap((tokenObject: { token: string; userId: Pick<User, "id">; userName: Pick<User, "name"> }) => {
           this.userId = tokenObject.userId;
-          this.authService.userId = this.userId;    //Added manually to pass this parameter at the home component
-          localStorage.setItem("token", tokenObject.token);
+          this.userName = tokenObject.userName;     //Retrieved from tokenObject (backend)
+
+          this.authService.userId = this.userId;    //Added manually to pass this parameters to other components
+          this.authService.userName = this.userName;
+          localStorage.setItem("token", tokenObject.token);   //Setted only in login component
           this.isUserLoggedIn$.next(true);
-          this.router.navigate(["home"]);
+          // @ts-ignore
+          if (this.authService.userId === 0)
+              this.router.navigate(["adminhome"]);
+          else
+              this.router.navigate(["home"]);
         }),
         catchError(this.errorHandlerService.handleError<{
             token: string;
             userId: Pick<User, "id">;
+            userName: Pick<User, "name">;
           }>("login")
         )
       )

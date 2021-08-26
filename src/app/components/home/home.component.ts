@@ -12,11 +12,14 @@ import { User } from "src/app/models/User"
 })
 export class HomeComponent implements OnInit {
   userId : Pick<User, "id">;
+  userName : Pick<User, "name">
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userId = this.authService.userId;
+    this.userName = this.authService.userName;
+    console.log("userName : ", this.userName)
   }
 
 }
