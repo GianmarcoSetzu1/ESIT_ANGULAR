@@ -6,7 +6,7 @@ import {User} from "../../models/User";
 import {catchError, first, tap} from "rxjs/operators";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {Router} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
   userName: Pick<User, "name">;
+  //users$ : Observable<User[]>
 
   constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
@@ -40,17 +41,25 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
       .pipe(
         first(),
-        tap((tokenObject: { token: string; userId: Pick<User, "id">; userName: Pick<User, "name"> }) => {
+        tap((tokenObject: { token: string; userId: Pick<User, "id">; userName: Pick<User, "name">}) => {
           this.userId = tokenObject.userId;
           this.userName = tokenObject.userName;     //Retrieved from tokenObject (backend)
 
           this.authService.userId = this.userId;    //Added manually to pass this parameters to other components
           this.authService.userName = this.userName;
-          localStorage.setItem("token", tokenObject.token);   //Setted only in login component
+
+          localStorage.setItem("token", tokenObject.token);   //Set TOKEN
+
           this.isUserLoggedIn$.next(true);
+          this.authService.isUserLoggedIn$.next(true);   //Setted also in auth service
+
           // @ts-ignore
-          if (this.authService.userId === 0)
-              this.router.navigate(["adminhome"]);
+          if (this.authService.userId === 0) {
+            // @ts-ignore
+            this.authService.isAdmin$.next(true);
+            this.router.navigate(["adminhome"]);
+
+          }
           else
               this.router.navigate(["home"]);
         }),
@@ -67,8 +76,5 @@ export class LoginComponent implements OnInit {
       );
 
   }
-
-  //   .login(this.loginForm.value.email, this.loginForm.value.password)
-    //   .subscribe();
 
 }

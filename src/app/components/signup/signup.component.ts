@@ -15,10 +15,18 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  isAuthenticated = false;
+  isAdmin = false;
 
   constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
+    this.authService.isAdmin$.subscribe((isAdminIn) => {
+      this.isAdmin = isAdminIn;
+    });
+    this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
+      this.isAuthenticated = isLoggedIn;
+    });
     this.signupForm = this.createFormGroup();
   }
 
@@ -43,7 +51,7 @@ export class SignupComponent implements OnInit {
         resp => console.log(resp),
         err => console.log(err)
       );
-      this.router.navigate([""]);
+      this.router.navigate(["adminhome"]);
       //this.router.navigate(["login"]);
       console.log(this.signupForm.value);
   }

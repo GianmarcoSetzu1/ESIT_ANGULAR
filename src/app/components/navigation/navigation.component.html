@@ -5,27 +5,15 @@
     </a>
   </span>
   <span>
-    <!--<a
-      routerLinkActive="active-link"
-      routerLink="/login"
-    >
-      <span>Login</span>
-    </a>
+
     <a
-      routerLinkActive="active-link"
-      routerLink="/login"
-    > -->
-    <a
+      *ngIf="isAuthenticated"
+      (click)="logout()"
       routerLinkActive="active-link"
       routerLink="/"
     >
       <span>Logout</span>
     </a>
-    <!--<a
-      routerLinkActive="active-link"
-      routerLink="/signup"
-    >
-      <span>Signup</span>
-    </a>-->
+
   </span>
 </mat-toolbar>

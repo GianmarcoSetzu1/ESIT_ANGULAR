@@ -15,8 +15,10 @@ export class AuthService {
   private url = "http://localhost:8000/auth";
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
+  isAdmin$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
   userName : Pick<User, "name">;
+  //users$ : Observable<User[]>;
 
 
   httpOptions: { headers: HttpHeaders } = {
@@ -35,10 +37,20 @@ export class AuthService {
 
 
   login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<any> {
-    //console.log(this.userId);
     return this.http
       .post(`${this.url}`, {email, password}, this.httpOptions);
-      //.post(`${this.url}/login`, {email, password}, this.httpOptions);
+  }
+
+  //When admin is logged in, return list of users
+  getUsers() {
+    this.isUserLoggedIn$.subscribe((isLoggedIn) => {
+      console.log("Logged in ", this.isUserLoggedIn$);
+    });
+    return this.http.get(`${this.url}/adminhome`);
+  }
+
+  deleteUser(id: number) {
+    return this.http.get(`${this.url}/adminhome/${id}`);
   }
 
 }
