@@ -6,8 +6,10 @@ import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component"
 import { AdminHomeComponent } from "./components/admin-home/admin-home.component";
+import {BuildingsComponent} from "./components/buildings/buildings.component";
 
 const routes: Routes = [
+  { path: "buildings", component: BuildingsComponent},
   { path: "home", component: HomeComponent },
   { path: "adminhome", component: AdminHomeComponent},
   { path: "", component: LoginComponent },

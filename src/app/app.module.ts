@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,8 @@ import { HomeComponent } from "./components/home/home.component";
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
+import { BuildingsComponent } from './components/buildings/buildings.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { AuthInterceptorService } from "./services/auth-interceptor.service";
     LoginComponent,
     HomeComponent,
     AdminHomeComponent,
+    BuildingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,8 @@ import { AuthInterceptorService } from "./services/auth-interceptor.service";
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [
     {

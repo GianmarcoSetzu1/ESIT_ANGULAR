@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { AuthService } from "src/app/services/auth.service";
+import { BuildingService} from "../../services/building.service";
+
 import {User} from "../../models/User";
 import {catchError, first, tap} from "rxjs/operators";
 import {ErrorHandlerService} from "../../services/error-handler.service";
@@ -21,9 +23,10 @@ export class LoginComponent implements OnInit {
   userName: Pick<User, "name">;
   //users$ : Observable<User[]>
 
-  constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
+  constructor(private authService: AuthService, private buildingService: BuildingService,  private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
+
     this.loginForm = this.createFormGroup();
   }
 
@@ -49,16 +52,19 @@ export class LoginComponent implements OnInit {
           this.authService.userName = this.userName;
 
           localStorage.setItem("token", tokenObject.token);   //Set TOKEN
+          localStorage.setItem("isUserLoggedIn", String(true));
+
 
           this.isUserLoggedIn$.next(true);
-          this.authService.isUserLoggedIn$.next(true);   //Setted also in auth service
+          this.authService.isUserLoggedIn$.next(true);   //Setted also in localStorage
 
           // @ts-ignore
           if (this.authService.userId === 0) {
             // @ts-ignore
-            this.authService.isAdmin$.next(true);
+            // this.authService.isAdmin$.next(true);   //Setted in localStorage
+            // this.buildingService.isAdmin$.next(true);
+            localStorage.setItem("isAdmin", String(true));
             this.router.navigate(["adminhome"]);
-
           }
           else
               this.router.navigate(["home"]);
@@ -74,7 +80,6 @@ export class LoginComponent implements OnInit {
          resp => console.log(resp),
          err => console.log(err)
       );
-
   }
 
 }

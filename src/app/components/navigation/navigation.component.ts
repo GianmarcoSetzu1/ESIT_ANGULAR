@@ -15,13 +15,18 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn;
+       this.isAuthenticated = isLoggedIn;
     });
+    if (Boolean(localStorage.getItem("isUserLoggedIn")))
+      this.isAuthenticated = true;
   }
 
   logout(): void {
     localStorage.removeItem("token");
-    this.authService.isUserLoggedIn$.next(false);
+    localStorage.removeItem("isUserLoggedIn");
+    localStorage.removeItem("isAdmin");
+    this.isAuthenticated = false;
+    //this.authService.isUserLoggedIn$.next(false);
     this.router.navigate(["login"]);
   }
 

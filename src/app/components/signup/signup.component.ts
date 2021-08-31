@@ -21,12 +21,8 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService, private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
-    this.authService.isAdmin$.subscribe((isAdminIn) => {
-      this.isAdmin = isAdminIn;
-    });
-    this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn;
-    });
+    this.isAdmin = Boolean(localStorage.getItem("isAdmin"));
+    this.isAuthenticated = Boolean(localStorage.getItem("isUserLoggedIn"));
     this.signupForm = this.createFormGroup();
   }
 

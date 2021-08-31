@@ -26,9 +26,7 @@ export class AuthService {
   };
 
   constructor(
-    private http: HttpClient,
-    private errorHandlerService: ErrorHandlerService,
-    private router: Router
+    private http: HttpClient
   ) {}
 
   signup(user: Omit<User, "id">): Observable<User> {
@@ -43,9 +41,6 @@ export class AuthService {
 
   //When admin is logged in, return list of users
   getUsers() {
-    this.isUserLoggedIn$.subscribe((isLoggedIn) => {
-      console.log("Logged in ", this.isUserLoggedIn$);
-    });
     return this.http.get(`${this.url}/adminhome`);
   }
 
