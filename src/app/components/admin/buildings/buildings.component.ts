@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import {AuthService} from "../../services/auth.service";
-import {BuildingService} from "../../services/building.service";
+import {AuthService} from "../../../services/auth.service";
+import {BuildingService} from "../../../services/building.service";
 
-import {Building} from "../../models/Building";
+import {Building} from "../../../models/Building";
 
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
 import {catchError, first, tap} from "rxjs/operators";
-import {User} from "../../models/User";
+import {User} from "../../../models/User";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ErrorHandlerService} from "../../services/error-handler.service";
+import {ErrorHandlerService} from "../../../services/error-handler.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-buildings',
@@ -29,7 +30,8 @@ export class BuildingsComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private buildingService: BuildingService,
-              private modalService : NgbModal, private errorHandlerService: ErrorHandlerService) { }
+              private modalService : NgbModal, private errorHandlerService: ErrorHandlerService,
+              private router:Router) { }
 
 
   ngOnInit(): void {
@@ -83,11 +85,17 @@ export class BuildingsComponent implements OnInit {
     this.buildingService.addBuilding(userId, this.addBuildingForm.value)
       .pipe(
       first(),
-      catchError(this.errorHandlerService.handleError<User>("signup")))
+      catchError(this.errorHandlerService.handleError<Building>("building")))
       .subscribe(
         resp => console.log(resp),
         err => console.log(err)
       );
       window.location.reload();
   }
+
+  findShutter(buildingId: number) {
+    sessionStorage.setItem("buildingId", buildingId.toString());
+    this.router.navigate(["shutters"]);
+  }
+
 }

@@ -1,0 +1,90 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<div *ngIf="isAuthenticated && isAdmin">
+  <h1> Bentornato Admin </h1>
+  <br><br><br>
+
+  <h3>Lista degli utenti </h3>
+  <br><br>
+
+  <mat-list dense>
+    <mat-list-item>
+      <mat-nav-list class="list-horizontal-header">
+        <mat-list-item >ID</mat-list-item>
+        <mat-list-item >NAME</mat-list-item>
+        <mat-list-item >EMAIL</mat-list-item>
+        <mat-list-item class="delete"> </mat-list-item>
+        <mat-list-item > </mat-list-item>
+      </mat-nav-list>
+    </mat-list-item>
+    <mat-list-item *ngFor="let user of users$">
+      <mat-nav-list class="list-horizontal">
+        <a mat-list-item (click)="findBuilding(user.id)">{{user.id}}</a>
+        <a mat-list-item (click)="findBuilding(user.id)">{{user.name}}</a>
+        <a mat-list-item (click)="findBuilding(user.id)">{{user.email}}</a>
+        <a mat-list-item class="delete" (click)="onDeleteUserClick(user.id)"><i class="material-icons">delete</i></a>
+        <a mat-list-item (click)="open(content, user.id, user.name, user.email)"><i class="material-icons">auto_fix_high</i></a>
+
+      </mat-nav-list>
+    </mat-list-item>
+  </mat-list>
+
+
+  <a
+    routerLinkActive="active-link"
+    routerLink="/signup"
+  >
+    <button
+      color="accent"
+      mat-raised-button
+    >
+      <span>+ Aggiungi utente </span>
+    </button>
+  </a>
+
+</div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+      <div class="form-group">
+        <label>Name</label>
+        <div class="input-group">
+          <input id="name" class="form-control" formControlName="name" >
+        </div>
+        <br>
+        <label>Email</label>
+        <div class="input-group">
+          <input id="email" class="form-control" formControlName="email">
+        </div>
+        <br>
+        <label>Password</label>
+        <div class="input-group">
+          <input id="password" type="password" class="form-control" formControlName="password">
+        </div>
+        <br>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-outline-dark"
+                [disabled]="!updateUserForm.valid"(click)="modal.close('Save click')">Save</button>
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<hr>
+
+<pre>{{ closeResult }}</pre>
+

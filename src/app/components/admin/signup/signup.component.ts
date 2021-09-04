@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {catchError, first} from "rxjs/operators";
-import {User} from "../../models/User";
-import {ErrorHandlerService} from "../../services/error-handler.service";
+import {User} from "../../../models/User";
+import {ErrorHandlerService} from "../../../services/error-handler.service";
 
 
 

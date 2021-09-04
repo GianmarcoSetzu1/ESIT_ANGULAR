@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
   userName: Pick<User, "name">;
   //users$ : Observable<User[]>
 
+
   constructor(private authService: AuthService, private buildingService: BuildingService,  private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
-
     this.loginForm = this.createFormGroup();
   }
 
@@ -66,8 +66,11 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("isAdmin", String(true));
             this.router.navigate(["adminhome"]);
           }
-          else
-              this.router.navigate(["home"]);
+          else {
+            sessionStorage.setItem("userName", String(this.userName));
+            sessionStorage.setItem("userId", String(this.userId));
+            this.router.navigate(["home"]);
+          }
         }),
         catchError(this.errorHandlerService.handleError<{
             token: string;

@@ -15,14 +15,16 @@ import { MatListModule } from "@angular/material/list";
 import { MatToolbarModule } from "@angular/material/toolbar";
 
 import { NavigationComponent } from "./components/navigation/navigation.component";
-import { SignupComponent } from "./components/signup/signup.component";
+import { SignupComponent } from "./components/admin/signup/signup.component";
 import { LoginComponent } from "./components/login/login.component";
-import { HomeComponent } from "./components/home/home.component";
-import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { HomeComponent } from "./components/user/home/home.component";
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
-import { BuildingsComponent } from './components/buildings/buildings.component';
+import { BuildingsComponent } from './components/admin/buildings/buildings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShuttersComponent } from './components/admin/shutters/shutters.component';
+import { ShuttersUserComponent } from './components/user/shutters-user/shutters-user.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     AdminHomeComponent,
     BuildingsComponent,
+    ShuttersComponent,
+    ShuttersUserComponent,
   ],
   imports: [
     BrowserModule,

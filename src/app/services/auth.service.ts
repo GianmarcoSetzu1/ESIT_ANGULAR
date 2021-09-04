@@ -6,6 +6,7 @@ import { User } from "../models/User";
 import {BehaviorSubject, Observable} from "rxjs";
 import {catchError, first, tap} from "rxjs/operators";
 import {ErrorHandlerService} from "./error-handler.service";
+import {Building} from "../models/Building";
 
 
 @Injectable({
@@ -47,5 +48,10 @@ export class AuthService {
   deleteUser(id: number) {
     return this.http.get(`${this.url}/adminhome/${id}`);
   }
+
+  updateUser(id: number, user : Omit<User, "id">): Observable<any> {
+    return this.http.post(`${this.url}/adminhome/${id}`, user, this.httpOptions);
+  }
+
 
 }

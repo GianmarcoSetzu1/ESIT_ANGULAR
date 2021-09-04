@@ -1,0 +1,21 @@
+<div *ngIf="isAuthenticated && !isAdmin">
+  <h1>Lista delle tapparelle dell'edificio n.{{buildingId}} </h1>
+  <br><br>
+  <mat-list dense>
+    <mat-list-item>
+      <mat-nav-list class="list-horizontal-header">
+        <mat-list-item>ID</mat-list-item>
+        <mat-list-item>NAME</mat-list-item>
+        <mat-list-item>ROOM</mat-list-item>
+      </mat-nav-list>
+    </mat-list-item>
+    <mat-list-item *ngFor="let shutter of shutters$">
+      <mat-nav-list class="list-horizontal">
+        <a mat-list-item >{{shutter.id}}</a>
+        <a mat-list-item >{{shutter.name}}</a>
+        <a mat-list-item >{{shutter.room}}</a>
+      </mat-nav-list>
+    </mat-list-item>
+  </mat-list>
+</div>
+

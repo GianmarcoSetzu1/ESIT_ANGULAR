@@ -1,26 +1,26 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 
 <div *ngIf="isAuthenticated && isAdmin">
-  <h1>Lista degli edifici dell'utente n.{{userId}} </h1>
+  <h2>Lista degli edifici dell'utente n.{{userId}} </h2>
   <br><br>
   <mat-list dense>
     <mat-list-item>
       <mat-nav-list class="list-horizontal-header">
-        <a mat-list-item >ID</a>
-        <a mat-list-item >NAME</a>
-        <a mat-list-item >CITY</a>
-        <a mat-list-item >ADDRESS</a>
-        <a mat-list-item >STREET NUMBER</a>
-        <a mat-list-item ></a>
+        <mat-list-item>ID</mat-list-item>
+        <mat-list-item >NAME</mat-list-item>
+        <mat-list-item >CITY</mat-list-item>
+        <mat-list-item >ADDRESS</mat-list-item>
+        <mat-list-item >STREET NUMBER</mat-list-item>
+        <mat-list-item ></mat-list-item>
       </mat-nav-list>
     </mat-list-item>
     <mat-list-item *ngFor="let building of buildings$">
       <mat-nav-list class="list-horizontal">
-        <a mat-list-item >{{building.id}}</a>
-        <a mat-list-item >{{building.name}}</a>
-        <a mat-list-item >{{building.city}}</a>
-        <a mat-list-item >{{building.address}}</a>
-        <a mat-list-item >{{building.street_number}}</a>
+        <a mat-list-item (click)="findShutter(building.id)">{{building.id}}</a>
+        <a mat-list-item (click)="findShutter(building.id)">{{building.name}}</a>
+        <a mat-list-item (click)="findShutter(building.id)">{{building.city}}</a>
+        <a mat-list-item (click)="findShutter(building.id)">{{building.address}}</a>
+        <a mat-list-item (click)="findShutter(building.id)">{{building.street_number}}</a>
         <a mat-list-item (click)="onDeleteBuildingClick(building.id, userId)"><i class="material-icons">delete</i></a>
       </mat-nav-list>
     </mat-list-item>
@@ -71,7 +71,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button type="submit"
+                class="btn btn-outline-dark"
+                [disabled]="!addBuildingForm.valid"(click)="modal.close('Save click')">Save</button>
       </div>
     </form>
   </div>
