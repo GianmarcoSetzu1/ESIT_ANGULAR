@@ -28,6 +28,13 @@ export class BuildingsComponent implements OnInit {
 
   addBuildingForm: FormGroup;
 
+  updateBuildingForm: FormGroup;
+  buildingFormId: number;
+  buildingFormName: string;
+  buildingFormCity: string;
+  buildingFormAddress: string;
+  buildingFormNumber: number;
+
 
   constructor(private authService: AuthService, private buildingService: BuildingService,
               private modalService : NgbModal, private errorHandlerService: ErrorHandlerService,
@@ -44,6 +51,7 @@ export class BuildingsComponent implements OnInit {
       this.buildings$ = buildings;
     });
     this.addBuildingForm = this.createFormGroup();
+    this.updateBuildingForm = this.createFormGroup();
   }
 
   onDeleteBuildingClick(id: number, owner : number) {
@@ -51,6 +59,31 @@ export class BuildingsComponent implements OnInit {
       this.buildings$ = this.buildings$.filter(val => val.id !== id);
       console.log(res);
     })
+  }
+
+  openUpdate(content : any, buildingId : number, buildingName : string, buildingCity : string,
+             buildingAddress : string, buildingNumber : number) {
+    this.buildingFormId = buildingId;
+    this.buildingFormName = buildingName;
+    this.buildingFormCity = buildingCity;
+    this.buildingFormAddress = buildingAddress;
+    this.buildingFormNumber = buildingNumber;
+    this.loadValues();
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  loadValues() {
+    this.updateBuildingForm.patchValue({
+        name : this.buildingFormName,
+        city : this.buildingFormCity,
+        address : this.buildingFormAddress,
+        street_number : this.buildingFormNumber
+      }
+    );
   }
 
 
@@ -91,6 +124,19 @@ export class BuildingsComponent implements OnInit {
         err => console.log(err)
       );
       window.location.reload();
+  }
+
+
+  updateBuilding () {
+    this.buildingService.updateBuilding(this.buildingFormId, this.userId, this.updateBuildingForm.value)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<Building>("building")))
+      .subscribe(
+        resp => console.log(resp),
+        err => console.log(err)
+      );
+    window.location.reload();
   }
 
   findShutter(buildingId: number) {

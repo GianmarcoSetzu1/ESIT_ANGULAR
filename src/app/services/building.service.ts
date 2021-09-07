@@ -35,7 +35,9 @@ export class BuildingService {
     return this.http.post(`${this.url}/buildings/${userId}`,building, this.httpOptions);
   }
 
-
+  updateBuilding(buildingId : number, userId : number, building : Omit<Building, "id, owner"> ): Observable<any>{
+    return this.http.post(`${this.url}/buildings/${buildingId}/${userId}`, building, this.httpOptions);
+  }
 
   findShutter(buildingId: number) {
     return this.http.get(`${this.url}/shutters/${buildingId}`);
@@ -47,6 +49,10 @@ export class BuildingService {
 
   addShutter(buildingId : number, shutter : Omit<Shutter, "id, building"> ): Observable<any>{
     return this.http.post(`${this.url}/shutters/${buildingId}`, shutter, this.httpOptions);
+  }
+
+  updateShutter(shutterId : number, buildingId : number, shutter : Omit<Shutter, "id, building"> ): Observable<any>{
+    return this.http.post(`${this.url}/shutters/${shutterId}/${buildingId}`, shutter, this.httpOptions);
   }
 
 }

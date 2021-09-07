@@ -11,6 +11,7 @@
         <mat-list-item >CITY</mat-list-item>
         <mat-list-item >ADDRESS</mat-list-item>
         <mat-list-item >STREET NUMBER</mat-list-item>
+        <mat-list-item class="delete"></mat-list-item>
         <mat-list-item ></mat-list-item>
       </mat-nav-list>
     </mat-list-item>
@@ -21,12 +22,13 @@
         <a mat-list-item (click)="findShutter(building.id)">{{building.city}}</a>
         <a mat-list-item (click)="findShutter(building.id)">{{building.address}}</a>
         <a mat-list-item (click)="findShutter(building.id)">{{building.street_number}}</a>
-        <a mat-list-item (click)="onDeleteBuildingClick(building.id, userId)"><i class="material-icons">delete</i></a>
+        <a mat-list-item class="delete" (click)="onDeleteBuildingClick(building.id, userId)"><i class="material-icons">delete</i></a>
+        <a mat-list-item (click)="openUpdate(content, building.id, building.name, building.city, building.address, building.street_number)"><i class="material-icons">auto_fix_high</i></a>
       </mat-nav-list>
     </mat-list-item>
   </mat-list>
 
-  <a (click)="open(content)">
+  <a (click)="open(contentN)">
 <!--    routerLinkActive="active-link"-->
 <!--    routerLink="/signup"-->
 
@@ -42,13 +44,13 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">New Building</h4>
+    <h4 class="modal-title" id="modal-basic-title">Update Building</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="addBuildingForm" (ngSubmit)="addBuilding(userId)">
+    <form [formGroup]="updateBuildingForm" (ngSubmit)="updateBuilding()">
       <div class="form-group">
         <label>Name</label>
         <div class="input-group">
@@ -73,15 +75,50 @@
       <div class="modal-footer">
         <button type="submit"
                 class="btn btn-outline-dark"
+                [disabled]="!updateBuildingForm.valid"(click)="modal.close('Save click')">Save</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #contentN let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" >New Building</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addBuildingForm" (ngSubmit)="addBuilding(userId)">
+      <div class="form-group">
+        <label>Name</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="name" >
+        </div>
+        <br>
+        <label>City</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="city">
+        </div>
+        <br>
+        <label>Address</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="address">
+        </div>
+        <br>
+        <label>Street Number</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="street_number">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                class="btn btn-outline-dark"
                 [disabled]="!addBuildingForm.valid"(click)="modal.close('Save click')">Save</button>
       </div>
     </form>
   </div>
-
 </ng-template>
 
-<!--<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>-->
 
-<hr>
-
-<pre>{{ closeResult }}</pre>

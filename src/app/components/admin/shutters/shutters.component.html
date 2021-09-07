@@ -9,7 +9,8 @@
         <a mat-list-item >ID</a>
         <a mat-list-item >NAME</a>
         <a mat-list-item >ROOM</a>
-        <a mat-list-item ></a>
+        <a mat-list-item class="delete"></a>
+        <a mat-list-item > </a>
       </mat-nav-list>
     </mat-list-item>
     <mat-list-item *ngFor="let shutter of shutters$">
@@ -17,12 +18,13 @@
         <a mat-list-item >{{shutter.id}}</a>
         <a mat-list-item >{{shutter.name}}</a>
         <a mat-list-item >{{shutter.room}}</a>
-        <a mat-list-item (click)="onDeleteShutterClick(shutter.id, buildingId)"><i class="material-icons">delete</i></a>
+        <a mat-list-item class="delete" (click)="onDeleteShutterClick(shutter.id, buildingId)"><i class="material-icons">delete</i></a>
+        <a mat-list-item (click)="openUpdate(content, shutter.id, shutter.name, shutter.room)"><i class="material-icons">auto_fix_high</i></a>
       </mat-nav-list>
     </mat-list-item>
   </mat-list>
 
-  <a (click)="open(content)">
+  <a (click)="open(contentN)">
     <!--    routerLinkActive="active-link"-->
     <!--    routerLink="/signup"-->
 
@@ -38,13 +40,13 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">New Shutter</h4>
+    <h4 class="modal-title" id="modal-basic-title">Update Shutter</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="addShutterForm" (ngSubmit)="addShutter(buildingId)">
+    <form [formGroup]="updateShutterForm" (ngSubmit)="updateShutter()">
       <div class="form-group">
         <label>Name</label>
         <div class="input-group">
@@ -59,7 +61,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit"
-                [disabled]="!addShutterForm.valid"
+                [disabled]="!updateShutterForm.valid"
                 class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
       </div>
     </form>
@@ -67,8 +69,33 @@
 
 </ng-template>
 
-<!--<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>-->
+<ng-template #contentN let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Shutter</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addShutterForm" (ngSubmit)="addShutter(buildingId)">
+      <div class="form-group">
+        <label>Name</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="name" >
+        </div>
+        <br>
+        <label>Room</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="room">
+        </div>
+        <br>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"
+                [disabled]="!addShutterForm.valid"
+                class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </div>
+    </form>
+  </div>
 
-<hr>
-
-<pre>{{ closeResult }}</pre>
+</ng-template>

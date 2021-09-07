@@ -23,6 +23,11 @@ export class ShuttersComponent implements OnInit {
 
   addShutterForm: FormGroup;
 
+  updateShutterForm: FormGroup;
+  shutterFormId: number;
+  shutterFormName: string;
+  shutterFormRoom: string;
+
   constructor(private buildingService: BuildingService,
               private modalService : NgbModal, private errorHandlerService: ErrorHandlerService) { }
 
@@ -36,6 +41,7 @@ export class ShuttersComponent implements OnInit {
       this.shutters$ = shutters;
     });
     this.addShutterForm = this.createFormGroup();
+    this.updateShutterForm = this.createFormGroup();
   }
 
 
@@ -44,6 +50,26 @@ export class ShuttersComponent implements OnInit {
       this.shutters$ = this.shutters$.filter(val => val.id !== id);
       console.log(res);
     })
+  }
+
+  openUpdate(content : any, shutterId : number, shutterName : string, shutterRoom : string ){
+    this.shutterFormId = shutterId;
+    this.shutterFormName = shutterName;
+    this.shutterFormRoom = shutterRoom;
+    this.loadValues();
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  loadValues() {
+    this.updateShutterForm.patchValue({
+          name : this.shutterFormName,
+          room : this.shutterFormRoom
+        }
+    );
   }
 
   open(content : any) {
@@ -82,6 +108,18 @@ export class ShuttersComponent implements OnInit {
         resp => console.log(resp),
         err => console.log(err)
       );
+    window.location.reload();
+  }
+
+  updateShutter () {
+    this.buildingService.updateShutter(this.shutterFormId, this.buildingId, this.updateShutterForm.value)
+        .pipe(
+            first(),
+            catchError(this.errorHandlerService.handleError<Building>("building")))
+        .subscribe(
+            resp => console.log(resp),
+            err => console.log(err)
+        );
     window.location.reload();
   }
 

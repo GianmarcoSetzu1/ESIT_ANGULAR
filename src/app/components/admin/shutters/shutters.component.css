@@ -7,6 +7,12 @@ mat-nav-list.list-horizontal {
   flex-direction: row;
 }
 
+mat-list-item .delete{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
 mat-nav-list.list-horizontal-header {
   width: 70%;
   display: flex;
