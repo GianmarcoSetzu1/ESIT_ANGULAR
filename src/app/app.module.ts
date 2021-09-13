@@ -25,6 +25,9 @@ import { BuildingsComponent } from './components/admin/buildings/buildings.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShuttersComponent } from './components/admin/shutters/shutters.component';
 import { ShuttersUserComponent } from './components/user/shutters-user/shutters-user.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -52,7 +55,10 @@ import { ShuttersUserComponent } from './components/user/shutters-user/shutters-
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [
     {

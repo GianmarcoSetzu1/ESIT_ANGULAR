@@ -55,4 +55,9 @@ export class BuildingService {
     return this.http.post(`${this.url}/shutters/${shutterId}/${buildingId}`, shutter, this.httpOptions);
   }
 
+
+  updateSlot(shutterId: number, slot : string, value: number) {
+    return this.http.get(`${this.url}/shutters/${shutterId}/${slot}/${value}`);
+  }
+
 }

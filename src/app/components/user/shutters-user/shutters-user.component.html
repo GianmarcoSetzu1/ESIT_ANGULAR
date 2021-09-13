@@ -9,13 +9,456 @@
         <mat-list-item>ROOM</mat-list-item>
       </mat-nav-list>
     </mat-list-item>
-    <mat-list-item *ngFor="let shutter of shutters$">
+    <div *ngFor="let shutter of shutters$">
       <mat-nav-list class="list-horizontal">
-        <a mat-list-item >{{shutter.id}}</a>
-        <a mat-list-item >{{shutter.name}}</a>
-        <a mat-list-item >{{shutter.room}}</a>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-list-item >{{shutter.id}}</mat-list-item>
+              <mat-list-item >{{shutter.name}}</mat-list-item>
+              <mat-list-item >{{shutter.room}}</mat-list-item>
+            </mat-expansion-panel-header>
+            <form>
+              <br>
+              <table class="table table-striped table-responsive-md btn-table">
+                <tr>
+                  <td>
+                    <p>00.00 : 01.00</p> <!-- [value]="recupero(shutter.id, 1)" -->
+                    <select [value]=shutter.f1 (change)='updateSlot(shutter.id, $event, "f1")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>08.00 : 09.00</p>
+                    <select [value]=shutter.f9 (change)='updateSlot(shutter.id, $event, "f9")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>16.00 : 17.00</p>
+                    <select [value]=shutter.f17 (change)='updateSlot(shutter.id, $event, "f17")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>01.00 : 02.00</p>
+                    <select [value]=shutter.f2 (change)='updateSlot(shutter.id, $event, "f2")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>09.00 : 10.00</p>
+                    <select [value]=shutter.f10 (change)='updateSlot(shutter.id, $event, "f10")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>17.00 : 18.00</p>
+                    <select [value]=shutter.f18 (change)='updateSlot(shutter.id, $event, "f18")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>02.00 : 03.00</p>
+                    <select [value]=shutter.f3 (change)='updateSlot(shutter.id, $event, "f3")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>10.00 : 11.00</p>
+                    <select [value]=shutter.f11 (change)='updateSlot(shutter.id, $event, "f11")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>18.00 : 19.00</p>
+                    <select [value]=shutter.f19 (change)='updateSlot(shutter.id, $event, "f19")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>03.00 : 04.00</p>
+                    <select [value]=shutter.f4 (change)='updateSlot(shutter.id, $event, "f4")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>11.00 : 12.00</p>
+                    <select [value]=shutter.f12 (change)='updateSlot(shutter.id, $event, "f12")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>19.00 : 20.00</p>
+                    <select [value]=shutter.f20 (change)='updateSlot(shutter.id, $event, "f20")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>04.00 : 05.00</p>
+                    <select [value]=shutter.f5 (change)='updateSlot(shutter.id, $event, "f5")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>12.00 : 13.00</p>
+                    <select [value]=shutter.f13 (change)='updateSlot(shutter.id, $event, "f13")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>20.00 : 21.00</p>
+                    <select [value]=shutter.f21 (change)='updateSlot(shutter.id, $event, "f21")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>05.00 : 06.00</p>
+                    <select [value]=shutter.f6 (change)='updateSlot(shutter.id, $event, "f6")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>13.00 : 14.00</p>
+                    <select [value]=shutter.f14 (change)='updateSlot(shutter.id, $event, "f14")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>21.00 : 22.00</p>
+                    <select [value]=shutter.f22 (change)='updateSlot(shutter.id, $event, "f22")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>06.00 : 07.00</p>
+                    <select [value]=shutter.f7 (change)='updateSlot(shutter.id, $event, "f7")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>14.00 : 15.00</p>
+                    <select [value]=shutter.f15 (change)='updateSlot(shutter.id, $event, "f15")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>22.00 : 23.00</p>
+                    <select [value]=shutter.f23 (change)='updateSlot(shutter.id, $event, "f23")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>07.00 : 08.00</p>
+                    <select [value]=shutter.f8 (change)='updateSlot(shutter.id, $event, "f8")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>15.00 : 16.00</p>
+                    <select [value]=shutter.f16 (change)='updateSlot(shutter.id, $event, "f16")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                  <td>
+                    <p>23.00 : 24.00</p>
+                    <select [value]=shutter.f24 (change)='updateSlot(shutter.id, $event, "f24")'>
+                      <option value="-1">Default</option>
+                      <option value="0">0%</option>
+                      <option value="10">10%</option>
+                      <option value="20">20%</option>
+                      <option value="30">30%</option>
+                      <option value="40">40%</option>
+                      <option value="50">50%</option>
+                      <option value="60">60%</option>
+                      <option value="70">70%</option>
+                      <option value="80">80%</option>
+                      <option value="90">90%</option>
+                      <option value="100">100%</option>
+                    </select><br><br>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
       </mat-nav-list>
-    </mat-list-item>
+    </div>
+
   </mat-list>
 </div>
 

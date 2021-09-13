@@ -15,7 +15,9 @@
     </mat-list-item>
     <mat-list-item *ngFor="let shutter of shutters$">
       <mat-nav-list class="list-horizontal">
-        <a mat-list-item >{{shutter.id}}</a>
+        <a mat-list-item >
+          {{shutter.id}}
+        </a>
         <a mat-list-item >{{shutter.name}}</a>
         <a mat-list-item >{{shutter.room}}</a>
         <a mat-list-item class="delete" (click)="onDeleteShutterClick(shutter.id, buildingId)"><i class="material-icons">delete</i></a>
