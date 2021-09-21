@@ -44,8 +44,18 @@ export class ShuttersUserComponent implements OnInit {
         resp => console.log(resp),
         err => console.log(err)
       );
-    console.log("Tapparella : ", shutterId);
-    console.log("Selected : ", val.target.value);
+  }
+
+  updateClosure(shutterId: number, val: any) {
+    this.buildingService.updateClosure(shutterId, Number(val.target.value))
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<User>("update")))
+      .subscribe(
+        resp => console.log(resp),
+        err => console.log(err)
+      );
+
   }
 
 }

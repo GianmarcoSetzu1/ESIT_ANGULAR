@@ -60,4 +60,9 @@ export class BuildingService {
     return this.http.get(`${this.url}/shutters/${shutterId}/${slot}/${value}`);
   }
 
+  updateClosure(shutterId: number, value: number) {
+    return this.http.post(`${this.url}/shutters/`,
+      {'shutterId' : shutterId, 'value' : value});
+  }
+
 }

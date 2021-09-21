@@ -5,8 +5,10 @@
     <mat-list-item>
       <mat-nav-list class="list-horizontal-header">
         <mat-list-item>ID</mat-list-item>
-        <mat-list-item>NAME</mat-list-item>
+        <mat-list-item>   NAME</mat-list-item>
         <mat-list-item>ROOM</mat-list-item>
+        <mat-list-item>CHIUSURA TOTALE</mat-list-item>
+        <mat-list-item>STATO</mat-list-item>
       </mat-nav-list>
     </mat-list-item>
     <div *ngFor="let shutter of shutters$">
@@ -17,6 +19,14 @@
               <mat-list-item >{{shutter.id}}</mat-list-item>
               <mat-list-item >{{shutter.name}}</mat-list-item>
               <mat-list-item >{{shutter.room}}</mat-list-item>
+              <mat-list-item >
+                <select [value]=shutter.closure (change)='updateClosure(shutter.id, $event)'>
+                  <option value=-1>Default</option>
+                  <option value=0> 0%</option>
+                  <option value=1> 100%</option>
+                </select>
+              </mat-list-item>
+              <mat-list-item > </mat-list-item>
             </mat-expansion-panel-header>
             <form>
               <br>
