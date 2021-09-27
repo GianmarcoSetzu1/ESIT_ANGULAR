@@ -13,7 +13,7 @@ import {User} from "../models/User";
   providedIn: 'root'
 })
 export class BuildingService {
-  private url = "http://localhost:8000/buildings";
+  private url = "http://3.122.206.142:8000/buildings";
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   isAdmin$ = new BehaviorSubject<boolean>(false);
 
@@ -40,7 +40,7 @@ export class BuildingService {
   }
 
   findShutter(buildingId: number) {
-    return this.http.get(`${this.url}/shutters/${buildingId}`);
+    return this.http.get(`${this.url}/shutterss/${buildingId}`);
   }
 
   deleteShutter(id: number, building: number) {
@@ -63,6 +63,10 @@ export class BuildingService {
   updateClosure(shutterId: number, value: number) {
     return this.http.post(`${this.url}/shutters/`,
       {'shutterId' : shutterId, 'value' : value});
+  }
+
+  getStatus(buildingId: number) {
+    return this.http.get(`${this.url}/shutters/${buildingId}`);
   }
 
 }

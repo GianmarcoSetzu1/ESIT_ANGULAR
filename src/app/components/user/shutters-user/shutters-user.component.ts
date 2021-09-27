@@ -18,6 +18,7 @@ export class ShuttersUserComponent implements OnInit {
   selectedOption : number;
   shutters$ : Shutter[];
   value$ : any;
+  //statoTapp : number
 
   //shutterTimeValue : FormGroup;
 
@@ -56,6 +57,16 @@ export class ShuttersUserComponent implements OnInit {
         err => console.log(err)
       );
 
+  }
+
+  getStatus(id : number) {
+    this.buildingService.getStatus(id).subscribe(value  => {
+      this.shutters$.forEach(s => {
+        if (s.id === id) {
+          s.stato = Number(value);
+        }
+      })
+    })
   }
 
 }

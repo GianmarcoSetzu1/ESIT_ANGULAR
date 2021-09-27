@@ -28,4 +28,5 @@ export interface Shutter {
   f23: number;
   f24: number;
   closure: number;
+  stato: number;
 }
