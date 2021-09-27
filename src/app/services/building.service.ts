@@ -13,7 +13,7 @@ import {User} from "../models/User";
   providedIn: 'root'
 })
 export class BuildingService {
-  private url = "http://3.122.206.142:8000/buildings";
+  private url = "http://3.69.95.103:8000/buildings";
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   isAdmin$ = new BehaviorSubject<boolean>(false);
 
