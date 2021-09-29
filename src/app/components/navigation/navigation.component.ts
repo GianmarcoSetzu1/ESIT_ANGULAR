@@ -27,7 +27,6 @@ export class NavigationComponent implements OnInit {
     localStorage.removeItem("isAdmin");
     sessionStorage.removeItem("userId");
     this.isAuthenticated = false;
-    //this.authService.isUserLoggedIn$.next(false);
     this.router.navigate(["login"]);
   }
 

@@ -8,7 +8,7 @@ import {User} from "../../models/User";
 import {catchError, first, tap} from "rxjs/operators";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {Router} from "@angular/router";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -21,10 +21,9 @@ export class LoginComponent implements OnInit {
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
   userName: Pick<User, "name">;
-  //users$ : Observable<User[]>
 
-
-  constructor(private authService: AuthService, private buildingService: BuildingService,  private errorHandlerService: ErrorHandlerService, private router:Router) {}
+  constructor(private authService: AuthService, private buildingService: BuildingService,
+              private errorHandlerService: ErrorHandlerService, private router:Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.createFormGroup();
@@ -54,15 +53,12 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token", tokenObject.token);   //Set TOKEN
           localStorage.setItem("isUserLoggedIn", String(true));
 
-
           this.isUserLoggedIn$.next(true);
           this.authService.isUserLoggedIn$.next(true);   //Setted also in localStorage
 
           // @ts-ignore
           if (this.authService.userId === 0) {
             // @ts-ignore
-            // this.authService.isAdmin$.next(true);   //Setted in localStorage
-            // this.buildingService.isAdmin$.next(true);
             localStorage.setItem("isAdmin", String(true));
             this.router.navigate(["adminhome"]);
           }

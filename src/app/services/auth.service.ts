@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-
 import { User } from "../models/User";
 import {BehaviorSubject, Observable} from "rxjs";
-import {catchError, first, tap} from "rxjs/operators";
-import {ErrorHandlerService} from "./error-handler.service";
-import {Building} from "../models/Building";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = "http://3.69.95.103:8000/auth";
+  private url = "http://localhost:8000/auth";
 
   isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
-  isAdmin$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id">;
   userName : Pick<User, "name">;
-  //users$ : Observable<User[]>;
 
 
   httpOptions: { headers: HttpHeaders } = {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Shutter} from "../../../models/Shutter";
 import {BuildingService} from "../../../services/building.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {catchError, first} from "rxjs/operators";
 import {User} from "../../../models/User";
 import {ErrorHandlerService} from "../../../services/error-handler.service";
@@ -18,9 +17,6 @@ export class ShuttersUserComponent implements OnInit {
   selectedOption : number;
   shutters$ : Shutter[];
   value$ : any;
-  //statoTapp : number
-
-  //shutterTimeValue : FormGroup;
 
   constructor(private buildingService: BuildingService, private errorHandlerService: ErrorHandlerService) { }
 
@@ -32,8 +28,7 @@ export class ShuttersUserComponent implements OnInit {
       this.shutters$ = shutters;
     });
     this.selectedOption = -1;
-    this.value$ = -1;//this.recupero(1, 1);
-    //this.shutterTimeValue = this.createFormGroup();
+    this.value$ = -1;
   }
 
   updateSlot(shutterId: number, val: any, slot: string) {

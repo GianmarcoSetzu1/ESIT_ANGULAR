@@ -6,12 +6,10 @@ import {BuildingService} from "../../../services/building.service";
 
 import {ErrorHandlerService} from "../../../services/error-handler.service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
 import {User} from "../../../models/User";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {catchError, first} from "rxjs/operators";
-import {Building} from "../../../models/Building";
 
 @Component({
   selector: 'app-admin-home',
@@ -19,7 +17,6 @@ import {Building} from "../../../models/Building";
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
-  //users$: Observable<User[]>;
   isAuthenticated = false;
   isAdmin = false;
   users$: User[];
@@ -40,24 +37,12 @@ export class AdminHomeComponent implements OnInit {
     this.isAdmin = Boolean(localStorage.getItem("isAdmin"));
     this.isAuthenticated = Boolean(localStorage.getItem("isUserLoggedIn"));
 
-    // this.authService.isAdmin$.subscribe((isAdminIn) => {
-    //   this.isAdmin = isAdminIn;
-    // });
-    // this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
-    //   this.isAuthenticated = isLoggedIn;
-    // });
     // @ts-ignore
-
     this.authService.getUsers().subscribe((users: User[]) => {
       this.users$ = users;
     });
 
     this.updateUserForm = this.createFormGroup();
-
-
-    //this.updateUserForm.controls.name.setValue(this.userFormName);
-    //this.updateUserForm.controls.email.setValue(this.userFormEmail);
-
   }
 
   loadValues() {

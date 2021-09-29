@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { AuthService } from "src/app/services/auth.service";
 
-import { User } from "src/app/models/User"
 import {Building} from "../../../models/Building";
 import {BuildingService} from "../../../services/building.service";
 import {Router} from "@angular/router";
@@ -14,9 +12,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //userId : Pick<User, "id">;
   userId : number;
-  //userName : Pick<User, "name">
   userName : string;
 
   isAuthenticated = false;
@@ -28,8 +24,6 @@ export class HomeComponent implements OnInit {
               private router:Router) {}
 
   ngOnInit(): void {
-    //this.userId = this.authService.userId;
-    //this.userName = this.authService.userName;
 
     this.userId = Number(sessionStorage.getItem("userId"));
     this.userName = String(sessionStorage.getItem("userName"));

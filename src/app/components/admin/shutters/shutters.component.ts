@@ -6,13 +6,13 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ErrorHandlerService} from "../../../services/error-handler.service";
 import {Building} from "../../../models/Building";
 import {catchError, first} from "rxjs/operators";
-import {User} from "../../../models/User";
 
 @Component({
   selector: 'app-shutters',
   templateUrl: './shutters.component.html',
   styleUrls: ['./shutters.component.css']
 })
+
 export class ShuttersComponent implements OnInit {
   isAuthenticated = false;
   isAdmin = false;
@@ -122,5 +122,4 @@ export class ShuttersComponent implements OnInit {
         );
     window.location.reload();
   }
-
 }

@@ -6,9 +6,7 @@ import {BuildingService} from "../../../services/building.service";
 import {Building} from "../../../models/Building";
 
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {HttpClient} from "@angular/common/http";
-import {catchError, first, tap} from "rxjs/operators";
-import {User} from "../../../models/User";
+import {catchError, first} from "rxjs/operators";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ErrorHandlerService} from "../../../services/error-handler.service";
 import {Router} from "@angular/router";

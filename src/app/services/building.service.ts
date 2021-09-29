@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import { Router } from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+
 
 import {Building} from "../models/Building";
 import {Shutter} from "../models/Shutter";
 
-import {BehaviorSubject, Observable} from "rxjs";
-import {User} from "../models/User";
+import {Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildingService {
-  private url = "http://3.69.95.103:8000/buildings";
-  isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
-  isAdmin$ = new BehaviorSubject<boolean>(false);
+  private url = "http://localhost:8000/buildings";
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -65,8 +63,8 @@ export class BuildingService {
       {'shutterId' : shutterId, 'value' : value});
   }
 
-  getStatus(buildingId: number) {
-    return this.http.get(`${this.url}/shutters/${buildingId}`);
+  getStatus(shutterId: number) {
+    return this.http.get(`${this.url}/shutters/${shutterId}`);
   }
 
 }
